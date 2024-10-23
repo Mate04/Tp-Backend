@@ -13,6 +13,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+
 @RestController
 @RequestMapping("/api/prueba")
 public class PruebaControlador {
@@ -26,6 +28,9 @@ public class PruebaControlador {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public void crearPrueba(@RequestBody Prueba prueba) {
+        if (prueba.getEmpleado() == null) {
+            throw new PruebaException("Debe ser asignado a un empleado la prueba");
+        }
         if (prueba.getInteresado() == null) {
             throw new PruebaException("El interesado es obligatorio");
         }
@@ -41,7 +46,7 @@ public class PruebaControlador {
         if (!vehiculo.isDisponible()) {
             throw new PruebaException("El vehiculo no esta disponible");
         }
-        if (interesadoTraido.getPruebas().) {
+        if (interesadoTraido.tienePruebaEnCurso()) {
             throw new PruebaException("El interesado ya esta haciendo una prueba en curso");
         }
 
@@ -49,6 +54,21 @@ public class PruebaControlador {
         vehiculoServico.save(vehiculo);
         pruebaServicio.save(prueba);
 
+     }
+
+
+     @PatchMapping("finalizar/{id}")
+     public ResponseEntity<Prueba> finalizarPrueba(@PathVariable Long id) {
+        Prueba prueba = pruebaServicio.findByID(id);
+        Vehiculo vehiculo = vehiculoServico.findByID(prueba.getVehiculo().getId());
+        if (prueba.getFechaFin() != null) {
+            throw new PruebaException("La prueba ya esta finalizada");
+        }
+        prueba.setFechaFin(LocalDateTime.now());
+        vehiculo.setDisponible(true);
+        vehiculoServico.save(vehiculo);
+        pruebaServicio.save(prueba);
+        return new ResponseEntity<>(prueba, HttpStatus.OK);
      }
 
     @ExceptionHandler(PruebaException.class)

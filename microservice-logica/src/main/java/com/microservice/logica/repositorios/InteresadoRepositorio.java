@@ -11,6 +11,5 @@ import java.util.List;
 
 @Repository
 public interface InteresadoRepositorio extends CrudRepository<Interesado, Long> {
-    @Query("SELECT s FROM Prueba s where s.fechaFin is null and s.interesado.documento = :documento")
-    List<Prueba> buscarPruebasEnCursoParaInteresado(@Param("documento") Long documento);
+
 }

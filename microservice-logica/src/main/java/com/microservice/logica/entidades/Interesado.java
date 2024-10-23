@@ -47,4 +47,8 @@ public class Interesado {
     public boolean validarLicencia(){
         return LocalDate.now().isBefore(fechaVencimientoLicencia.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
     }
+
+    public boolean tienePruebaEnCurso(){
+        return pruebas.stream().anyMatch(prueba -> prueba.getFechaFin() == null);
+    }
 }

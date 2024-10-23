@@ -21,17 +21,11 @@ public class InteresadoServicioImpl implements Servicio<Interesado,Long>{
 
     @Override
     public Interesado findByID(Long id) {
-        return interesadoRepositorio.findById(id).orElseThrow();
+        return interesadoRepositorio.findById(id).orElseThrow(() -> new PruebaException("No se encontro el interesado"));
     }
 
     @Override
     public void save(Interesado interesado) {
         interesadoRepositorio.save(interesado);
-    }
-
-    public boolean tienePruebasEnCurso(Interesado interesado) {
-        var res = interesadoRepositorio.buscarPruebasEnCursoParaInteresado(interesado.getDocumento());
-        res.forEach(System.out::println);
-        return !res.isEmpty();
     }
 }

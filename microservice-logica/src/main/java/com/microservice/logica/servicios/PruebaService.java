@@ -1,6 +1,7 @@
 package com.microservice.logica.servicios;
 
 import com.microservice.logica.entidades.Prueba;
+import com.microservice.logica.excepciones.PruebaException;
 import com.microservice.logica.repositorios.PruebaRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,7 @@ public class PruebaService implements Servicio<Prueba, Long> {
 
     @Override
     public Prueba findByID(Long id) {
-        return pruebaRepositorio.findById(id).orElseThrow();
+        return pruebaRepositorio.findById(id).orElseThrow(() -> new PruebaException("no se encontro la prueba"));
     }
 
     @Override

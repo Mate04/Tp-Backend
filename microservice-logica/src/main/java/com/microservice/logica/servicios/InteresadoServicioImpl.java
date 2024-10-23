@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class InteresadoServicioImpl implements IInteresadoServicio{
+public class InteresadoServicioImpl implements Servicio<Interesado,Long>{
 
     @Autowired
     private InteresadoRepositorio interesadoRepositorio;
@@ -19,7 +19,7 @@ public class InteresadoServicioImpl implements IInteresadoServicio{
     }
 
     @Override
-    public Interesado findById(Long id) {
+    public Interesado findByID(Long id) {
         return interesadoRepositorio.findById(id).orElseThrow();
     }
 

@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 
@@ -41,4 +43,8 @@ public class Interesado {
             inverseJoinColumns = @JoinColumn(name = "id_vehiculo")
     )
     private List<Vehiculo> vehiculosInteresados;
+
+    public boolean validarLicencia(){
+        return LocalDate.now().isBefore(fechaVencimientoLicencia.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+    }
 }

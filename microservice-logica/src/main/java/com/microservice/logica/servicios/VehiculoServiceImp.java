@@ -1,6 +1,7 @@
 package com.microservice.logica.servicios;
 
 import com.microservice.logica.entidades.Vehiculo;
+import com.microservice.logica.excepciones.PruebaException;
 import com.microservice.logica.repositorios.VehiculoRepostorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,7 @@ public class VehiculoServiceImp implements Servicio<Vehiculo,Long>{
     }
     @Override
     public Vehiculo findByID(Long Id) {
-        return vehiculoRepostorio.findById(Id).orElseThrow();
+        return vehiculoRepostorio.findById(Id).orElseThrow(() -> new PruebaException("No encontrado interesado"));
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.microservice.logica.servicios;
 
 import com.microservice.logica.entidades.Interesado;
+import com.microservice.logica.excepciones.PruebaException;
 import com.microservice.logica.repositorios.InteresadoRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,5 +27,11 @@ public class InteresadoServicioImpl implements Servicio<Interesado,Long>{
     @Override
     public void save(Interesado interesado) {
         interesadoRepositorio.save(interesado);
+    }
+
+    public boolean tienePruebasEnCurso(Interesado interesado) {
+        var res = interesadoRepositorio.buscarPruebasEnCursoParaInteresado(interesado.getDocumento());
+        res.forEach(System.out::println);
+        return !res.isEmpty();
     }
 }

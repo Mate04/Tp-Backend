@@ -74,14 +74,17 @@ public class PruebaControlador {
 
 
      @PatchMapping("finalizar/{id}")
-     public ResponseEntity<DTOPrueba> finalizarPrueba(@PathVariable Long id, @RequestBody DTOComentario comentario) {
+     public ResponseEntity<DTOPrueba> finalizarPrueba(@PathVariable Long id, @RequestBody(required = false) DTOComentario comentario) {
         Prueba prueba = pruebaServicio.findByID(id);
         Vehiculo vehiculo = vehiculoServico.findByID(prueba.getVehiculo().getId());
         if (prueba.getFechaFin() != null) {
             throw new PruebaException("La prueba ya esta finalizada");
         }
-        prueba.setComentario(comentario.getComentario());
         prueba.setFechaFin(LocalDateTime.now());
+
+         if (comentario != null) {
+             prueba.setComentario(comentario.getComentario());
+         }
         vehiculo.setDisponible(true);
         vehiculoServico.save(vehiculo);
         pruebaServicio.save(prueba);

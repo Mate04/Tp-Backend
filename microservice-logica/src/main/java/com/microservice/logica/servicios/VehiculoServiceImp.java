@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 @Service
 public class VehiculoServiceImp implements Servicio<Vehiculo,Long>{
 
@@ -28,5 +29,7 @@ public class VehiculoServiceImp implements Servicio<Vehiculo,Long>{
     public void save(Vehiculo entity) {
         vehiculoRepostorio.save(entity);
     }
-    public void update(Vehiculo entity) {vehiculoRepostorio.save(entity);}
+    public void update(Vehiculo entity) {
+        vehiculoRepostorio.save(entity);
+    }
 }

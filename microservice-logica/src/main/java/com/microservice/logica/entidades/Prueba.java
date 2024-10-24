@@ -36,6 +36,10 @@ public class Prueba {
 
     @Column(name = "fecha_fin", nullable = true)
     private LocalDateTime fechaFin;
+
+
+    private String comentario;
+
     // Método que se ejecuta antes de guardar el objeto en la base de datos
     @PrePersist
     protected void onCreate() {

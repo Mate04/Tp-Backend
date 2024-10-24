@@ -1,5 +1,7 @@
 package com.microservice.logica.controladores;
 
+import com.microservice.logica.controladores.DTO.DTOComentario;
+import com.microservice.logica.controladores.DTO.DTOPrueba;
 import com.microservice.logica.entidades.Interesado;
 import com.microservice.logica.entidades.Prueba;
 import com.microservice.logica.entidades.Vehiculo;
@@ -14,6 +16,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/prueba")
@@ -30,8 +34,7 @@ public class PruebaControlador {
     public void crearPrueba(@RequestBody Prueba prueba) {
         if (prueba.getEmpleado() == null) {
             throw new PruebaException("Debe ser asignado a un empleado la prueba");
-        }
-        if (prueba.getInteresado() == null) {
+        } if (prueba.getInteresado() == null) {
             throw new PruebaException("El interesado es obligatorio");
         }
         Interesado interesadoTraido = interesadoServicio.findByID(prueba.getInteresado().getDocumento());
@@ -56,19 +59,33 @@ public class PruebaControlador {
 
      }
 
+     @GetMapping
+     @RequestMapping("/obtenerEnCurso")
+     public List<DTOPrueba> obtenerPruebasEnCurso() {
+        List<Prueba> pruebasEnCurso = pruebaServicio.buscarPruebasEnCurso();
+        List<DTOPrueba> pruebasEnCursoDTO = new ArrayList<>();
+        for (Prueba prueba : pruebasEnCurso) {
+            pruebasEnCursoDTO.add(new DTOPrueba(prueba));
+        }
+        return pruebasEnCursoDTO;
+     }
+
+
+
 
      @PatchMapping("finalizar/{id}")
-     public ResponseEntity<Prueba> finalizarPrueba(@PathVariable Long id) {
+     public ResponseEntity<DTOPrueba> finalizarPrueba(@PathVariable Long id, @RequestBody DTOComentario comentario) {
         Prueba prueba = pruebaServicio.findByID(id);
         Vehiculo vehiculo = vehiculoServico.findByID(prueba.getVehiculo().getId());
         if (prueba.getFechaFin() != null) {
             throw new PruebaException("La prueba ya esta finalizada");
         }
+        prueba.setComentario(comentario.getComentario());
         prueba.setFechaFin(LocalDateTime.now());
         vehiculo.setDisponible(true);
         vehiculoServico.save(vehiculo);
         pruebaServicio.save(prueba);
-        return new ResponseEntity<>(prueba, HttpStatus.OK);
+        return new ResponseEntity<>(new DTOPrueba(prueba), HttpStatus.OK);
      }
 
     @ExceptionHandler(PruebaException.class)

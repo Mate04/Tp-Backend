@@ -9,6 +9,6 @@ import java.util.List;
 
 @Repository
 public interface PruebaRepositorio extends CrudRepository<Prueba, Long> {
-    @Query("SELECT s FROM Prueba s where s.fechaFin = null ")
+    @Query("SELECT s FROM Prueba s where s.fechaFin is null ")
     List<Prueba> findAllByFechaFinNula();
 }

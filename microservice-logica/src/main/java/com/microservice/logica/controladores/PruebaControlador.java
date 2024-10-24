@@ -54,7 +54,7 @@ public class PruebaControlador {
         }
 
         vehiculo.setDisponible(false);
-        vehiculoServico.save(vehiculo);
+        vehiculoServico.update(vehiculo);
         pruebaServicio.save(prueba);
 
      }
@@ -86,7 +86,7 @@ public class PruebaControlador {
              prueba.setComentario(comentario.getComentario());
          }
         vehiculo.setDisponible(true);
-        vehiculoServico.save(vehiculo);
+        vehiculoServico.update(vehiculo);
         pruebaServicio.save(prueba);
         return new ResponseEntity<>(new DTOPrueba(prueba), HttpStatus.OK);
      }

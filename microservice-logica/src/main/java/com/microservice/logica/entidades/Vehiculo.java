@@ -35,4 +35,10 @@ public class Vehiculo {
 
     @ManyToMany(mappedBy = "vehiculosInteresados", cascade = CascadeType.ALL)
     private List<Interesado> interesados;
+
+    //cuando se crea siempre se va a poner que esta disponible
+    @PrePersist
+    public void prePersist() {
+            this.disponible = true;
+    }
 }

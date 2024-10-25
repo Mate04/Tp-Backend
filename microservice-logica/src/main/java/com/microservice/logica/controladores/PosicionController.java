@@ -19,7 +19,7 @@ public class PosicionController {
     @Autowired
     private PosicionService posicionService;
 
-    @PostMapping("/mandarPosicion")
+    @PostMapping("/posicion")
     public String crearUbicacionVehiculo(@RequestBody Posicion posicion) {
         posicionService.save(posicion);
         return "OK";

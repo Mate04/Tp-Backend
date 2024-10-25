@@ -21,14 +21,14 @@ public class VehiculoController {
     VehiculoServiceImp vehiculoServiceImp;
 
 
-    @PostMapping("/crearVehiculo")
+    @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<String> crearVehiculo(@RequestBody Vehiculo vehiculo) {
         vehiculoServiceImp.save(vehiculo);
         return new ResponseEntity<>("Se creo correctamente el vehiculo", HttpStatus.OK);
     }
 
-    @GetMapping("/lista/Vehiculos")
+    @GetMapping("/all")
     public ResponseEntity<List<DTOVehiculo>> findAllVehiculos() {
         List<DTOVehiculo> vehiculos = vehiculoServiceImp.findAll()
                 .stream()

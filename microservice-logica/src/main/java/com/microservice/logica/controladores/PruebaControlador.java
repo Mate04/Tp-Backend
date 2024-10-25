@@ -60,7 +60,7 @@ public class PruebaControlador {
      }
 
      @GetMapping
-     @RequestMapping("/obtenerEnCurso")
+     @RequestMapping("/pruebas-en-curso")
      public List<DTOPrueba> obtenerPruebasEnCurso() {
         List<Prueba> pruebasEnCurso = pruebaServicio.buscarPruebasEnCurso();
         List<DTOPrueba> pruebasEnCursoDTO = new ArrayList<>();

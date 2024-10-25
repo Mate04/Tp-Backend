@@ -30,4 +30,11 @@ public class Posicion {
 
     private double longitud;
 
+    @PrePersist
+    protected void onCreate() {
+        fechaHora = LocalDateTime.now();
+    }
+
+
+
 }

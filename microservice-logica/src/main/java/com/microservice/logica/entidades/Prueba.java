@@ -47,4 +47,6 @@ public class Prueba {
             fechaInicio = LocalDateTime.now(); // Fecha y hora actual
         }
     }
+
+
 }

@@ -82,9 +82,11 @@ public class PruebaControlador {
         }
         prueba.setFechaFin(LocalDateTime.now());
 
+
          if (comentario != null) {
              prueba.setComentario(comentario.getComentario());
          }
+
         vehiculo.setDisponible(true);
         vehiculoServico.update(vehiculo);
         pruebaServicio.save(prueba);

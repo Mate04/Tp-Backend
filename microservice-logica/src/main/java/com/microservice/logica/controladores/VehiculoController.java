@@ -21,19 +21,20 @@ public class VehiculoController {
     VehiculoServiceImp vehiculoServiceImp;
 
 
-    @GetMapping("/lista/Vehiculos")
-    public ResponseEntity<List<DTOVehiculo>> a() {
+    @PostMapping()
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<String> crearVehiculo(@RequestBody Vehiculo vehiculo) {
+        vehiculoServiceImp.save(vehiculo);
+        return new ResponseEntity<>("Se creo correctamente el vehiculo", HttpStatus.OK);
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<DTOVehiculo>> findAllVehiculos() {
         List<DTOVehiculo> vehiculos = vehiculoServiceImp.findAll()
                 .stream()
                 .map(DTOVehiculo::new)
                 .toList();
         return new ResponseEntity<>(vehiculos, HttpStatus.OK);
-    }
-
-    @PostMapping("/crearVehiculo")
-    public ResponseEntity<String> crearVehiculo(@RequestBody Vehiculo vehiculo) {
-        vehiculoServiceImp.save(vehiculo);
-        return new ResponseEntity<>("Se creo correctamente el vehiculo", HttpStatus.OK);
     }
 
     //manejo de error

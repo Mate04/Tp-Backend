@@ -37,6 +37,9 @@ public class Prueba {
     @Column(name = "fecha_fin", nullable = true)
     private LocalDateTime fechaFin;
 
+    @Column(name = "hubo_incidente")
+    private Boolean huboIncidente;
+
 
     private String comentario;
 
@@ -46,5 +49,8 @@ public class Prueba {
         if (fechaInicio == null) {
             fechaInicio = LocalDateTime.now(); // Fecha y hora actual
         }
+        this.setHuboIncidente(false);
     }
+
+
 }

@@ -41,4 +41,8 @@ public class Vehiculo {
     public void prePersist() {
             this.disponible = true;
     }
+
+    public Prueba obtenerPruebaActual(){
+        return pruebas.stream().filter( prueba -> prueba.getFechaFin() == null).findFirst().orElse(null);
+    }
 }

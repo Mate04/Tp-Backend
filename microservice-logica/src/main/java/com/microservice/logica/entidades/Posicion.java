@@ -13,7 +13,6 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-
 public class Posicion {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -29,5 +28,18 @@ public class Posicion {
     private double latitud;
 
     private double longitud;
+
+    public Posicion(Vehiculo vehiculo, double latitud,double longitud){
+        this.vehiculo = vehiculo;
+        this.latitud = latitud;
+        this.longitud = longitud;
+    }
+
+    @PrePersist
+    protected void onCreate() {
+        fechaHora = LocalDateTime.now();
+    }
+
+
 
 }

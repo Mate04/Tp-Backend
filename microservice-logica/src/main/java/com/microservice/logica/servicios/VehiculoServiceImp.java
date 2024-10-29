@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class VehiculoServiceImp implements Servicio<Vehiculo,Long>{
+public class VehiculoServiceImp implements IServicio<Vehiculo,Long> {
 
 
     @Autowired
@@ -24,7 +24,7 @@ public class VehiculoServiceImp implements Servicio<Vehiculo,Long>{
     }
     @Override
     public Vehiculo findByID(Long Id) {
-        return vehiculoRepostorio.findById(Id).orElseThrow(() -> new PruebaException("No encontrado interesado"));
+        return vehiculoRepostorio.findById(Id).orElseThrow(() -> new PruebaException("No encontrado vehiculo"));
     }
 
     @Override

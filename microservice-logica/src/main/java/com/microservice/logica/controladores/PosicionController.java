@@ -15,7 +15,6 @@ import org.springframework.web.client.RestTemplate;
 @RequestMapping("api/posicion")
 public class PosicionController {
 
-
     @Autowired
     private PosicionService posicionService;
 
@@ -24,8 +23,6 @@ public class PosicionController {
         posicionService.save(posicion);
         return "OK";
     }
-
-
 
     //Manejo de errores
     @ExceptionHandler(PruebaException.class)

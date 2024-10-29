@@ -28,4 +28,7 @@ public class ServiceNotificacionAdverentencia implements IService<NotificacionAd
     public void save(NotificacionAdvertencia entity) {
         repoNotificacionAdvetencia.save(entity);
     }
+    public List<NotificacionAdvertencia> buscarIncidentesPorEmpleado(Long legajo) {
+        return repoNotificacionAdvetencia.findAllByLegajoEmpleado(legajo);
+    }
 }

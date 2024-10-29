@@ -15,7 +15,7 @@ public class Coordenada {
         //calculo la distancia aplicando pitagoras
         return  (float) Math.sqrt(deltaX * deltaX + deltaY * deltaY);
     }
-    public boolean pasoDeLaZona(Coordenada punto, float distanciaMax){
+    public boolean pasoDistanciaMaxima(Coordenada punto, float distanciaMax){
         float distancia = calcularDistancia(punto);
         return distancia > distanciaMax;
 

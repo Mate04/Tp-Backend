@@ -4,7 +4,6 @@ import com.microservice.logica.entidades.Prueba;
 import com.microservice.logica.excepciones.PruebaException;
 import com.microservice.logica.repositorios.PruebaRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

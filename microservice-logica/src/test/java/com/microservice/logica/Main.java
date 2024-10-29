@@ -15,5 +15,6 @@ public class Main {
         Coordenada a = new Coordenada(3,1);
         Coordenada b = new Coordenada(5,2);
         System.out.println(a.calcularDistancia(b));
+        System.out.println(a.pasoDistanciaMaxima(b,2.235F));
     }
 }

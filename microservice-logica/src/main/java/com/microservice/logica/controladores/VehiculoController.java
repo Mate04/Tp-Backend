@@ -1,5 +1,6 @@
 package com.microservice.logica.controladores;
 
+import com.microservice.logica.controladores.DTO.DTOFechaPeriodo;
 import com.microservice.logica.controladores.DTO.DTOVehiculo;
 import com.microservice.logica.entidades.Vehiculo;
 import com.microservice.logica.excepciones.ErrorResponse;
@@ -10,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,6 +38,19 @@ public class VehiculoController {
                 .toList();
         return new ResponseEntity<>(vehiculos, HttpStatus.OK);
     }
+
+    @GetMapping("/recorrido/{id}")
+    public ResponseEntity<?> findVehiculoById(
+            @PathVariable("id") Long id,
+            @RequestBody DTOFechaPeriodo fechaPeriodo) {
+        if (fechaPeriodo.getFechaInicio() == null || fechaPeriodo.getFechaFin() == null) {
+            throw new PruebaException("Las fechas de inicio y fin son obligatorias");
+        }
+        DTOVehiculo resultado = vehiculoServiceImp.getReporteDistanciaVehiculo(id,fechaPeriodo.getFechaInicio(),fechaPeriodo.getFechaFin());
+        return new ResponseEntity<>(resultado, HttpStatus.OK);
+    }
+
+
 
     //manejo de error
     @ExceptionHandler(PruebaException.class)

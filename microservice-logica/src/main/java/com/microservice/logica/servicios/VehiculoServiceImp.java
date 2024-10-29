@@ -1,5 +1,6 @@
 package com.microservice.logica.servicios;
 
+import com.microservice.logica.controladores.DTO.report.DTOVehiculoReport;
 import com.microservice.logica.entidades.Vehiculo;
 import com.microservice.logica.excepciones.PruebaException;
 import com.microservice.logica.repositorios.ModeloRepositorio;
@@ -7,6 +8,8 @@ import com.microservice.logica.repositorios.VehiculoRepostorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -43,4 +46,21 @@ public class VehiculoServiceImp implements IServicio<Vehiculo,Long> {
     public void update(Vehiculo entity) {
         vehiculoRepostorio.save(entity);
     }
+
+
+    public DTOVehiculoReport getReporteDistanciaVehiculo(Long Id, Date fechaInicio, Date fechaFin) {
+        Vehiculo vehiculo = this.findByID(Id);
+
+        // Verificar si fechaInicio es mayor que fechaFin
+        if (fechaInicio.after(fechaFin)) {
+            // Intercambiar las fechas
+            Date temp = fechaInicio;
+            fechaInicio = fechaFin;
+            fechaFin = temp;
+        }
+        return new DTOVehiculoReport(vehiculo,vehiculo.calcularDistanciaEnPeriodo(fechaInicio, fechaFin));
+
+
+    }
+
 }

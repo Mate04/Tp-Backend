@@ -37,10 +37,6 @@ public class VehiculoController {
         return new ResponseEntity<>(vehiculos, HttpStatus.OK);
     }
 
-
-
-
-
     //manejo de error
     @ExceptionHandler(PruebaException.class)
     public ResponseEntity<ErrorResponse> handlePruebaException(PruebaException ex) {

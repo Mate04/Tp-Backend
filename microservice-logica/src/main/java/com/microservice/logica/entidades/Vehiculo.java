@@ -44,7 +44,5 @@ public class Vehiculo {
 
     public Prueba obtenerPruebaActual(){
         return pruebas.stream().filter( prueba -> prueba.getFechaFin() == null).findFirst().orElse(null);
-
-
     }
 }

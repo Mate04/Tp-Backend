@@ -16,6 +16,7 @@ public class DTOPrueba {
     private Long interesadoDocumento;
     private String vehiculoPatente;
     private String comentario;
+    private Boolean incidente;
 
     public DTOPrueba(Prueba prueba) {
         this.id = prueba.getId();
@@ -24,5 +25,6 @@ public class DTOPrueba {
         this.interesadoDocumento = prueba.getInteresado().getDocumento();
         this.vehiculoPatente = prueba.getVehiculo().getPatente();
         this.comentario = prueba.getComentario();
+        this.incidente = prueba.getHuboIncidente();
     }
 }

@@ -19,11 +19,14 @@ public class PosicionController {
     @Autowired
     private PosicionService posicionService;
 
-    @PostMapping("/posicion")
+    @PostMapping("")
     public String crearUbicacionVehiculo(@RequestBody Posicion posicion) {
         posicionService.save(posicion);
         return "OK";
     }
+
+
+
     //Manejo de errores
     @ExceptionHandler(PruebaException.class)
     public ResponseEntity<ErrorResponse> handlePruebaException(PruebaException ex) {

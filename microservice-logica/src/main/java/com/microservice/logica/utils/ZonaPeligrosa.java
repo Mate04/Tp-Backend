@@ -17,7 +17,6 @@ public class ZonaPeligrosa {
     }
 
 
-
     public boolean contiene(Coordenada punto){
         double Ymax = coordenadaNoroeste.getLatitud();
         double Ymin = coordenadaSuroeste.getLatitud();

@@ -46,11 +46,22 @@ public class PruebaControlador {
         return pruebasEnCursoDTO;
      }
 
+    @RequestMapping("/pruebas-incidentes")
+    public List<DTOPrueba> buscarPruebasConIncidentes() {
+        List<Prueba> pruebasConIncidentes = pruebaServicio.buscarPruebasConIncidentes();
+        List<DTOPrueba> pruebasConIncidentesDTO = new ArrayList<>();
+        for (Prueba prueba : pruebasConIncidentes) {
+            pruebasConIncidentesDTO.add(new DTOPrueba(prueba));
+        }
+        return pruebasConIncidentesDTO;
+    }
+
      @PatchMapping("/finalizar/{id}")
      public ResponseEntity<DTOPrueba> finalizarPrueba(@PathVariable Long id, @RequestBody(required = false) DTOComentario comentario) {
         Prueba prueba = pruebaServicio.finalizar(id, comentario);
         return new ResponseEntity<>(new DTOPrueba(prueba), HttpStatus.OK);
      }
+
 
     @ExceptionHandler(PruebaException.class)
     public ResponseEntity<ErrorResponse> handlePruebaException(PruebaException ex) {

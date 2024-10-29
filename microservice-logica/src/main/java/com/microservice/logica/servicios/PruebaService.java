@@ -88,4 +88,9 @@ public class PruebaService implements IServicio<Prueba, Long> {
     public List<Prueba> buscarPruebasEnCurso() {
         return (List<Prueba>) pruebaRepositorio.findAllByFechaFinNula();
     }
+
+    public List<Prueba> buscarPruebasConIncidentes(){
+        return (List<Prueba>)  pruebaRepositorio.findAllByHuboIncidente();
+    }
 }
+

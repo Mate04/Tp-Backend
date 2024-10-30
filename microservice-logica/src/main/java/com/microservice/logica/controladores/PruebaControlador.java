@@ -56,11 +56,21 @@ public class PruebaControlador {
         return pruebasConIncidentesDTO;
     }
 
-     @PatchMapping("/finalizar/{id}")
-     public ResponseEntity<DTOPrueba> finalizarPrueba(@PathVariable Long id, @RequestBody(required = false) DTOComentario comentario) {
+    @RequestMapping("/pruebasVehiculo/{id_vehiculo}")
+    public List<DTOPrueba> buscarPruebasXVehiculo(@PathVariable Long id_vehiculo) {
+        List<Prueba> pruebasXVehiculo = pruebaServicio.buscarPruebasXVehiculo(id_vehiculo);
+        List<DTOPrueba> pruebasXVehiculoDTO = new ArrayList<>();
+        for (Prueba prueba : pruebasXVehiculo){
+            pruebasXVehiculoDTO.add(new DTOPrueba(prueba));
+        }
+        return pruebasXVehiculoDTO;
+    }
+
+    @PatchMapping("/finalizar/{id}")
+    public ResponseEntity<DTOPrueba> finalizarPrueba(@PathVariable Long id, @RequestBody(required = false) DTOComentario comentario) {
         Prueba prueba = pruebaServicio.finalizar(id, comentario);
         return new ResponseEntity<>(new DTOPrueba(prueba), HttpStatus.OK);
-     }
+    }
 
 
     @ExceptionHandler(PruebaException.class)

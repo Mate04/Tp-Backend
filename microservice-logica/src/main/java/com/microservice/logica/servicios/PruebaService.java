@@ -81,6 +81,7 @@ public class PruebaService implements IServicio<Prueba, Long> {
         vehiculoServico.update(vehiculo);
         return pruebaRepositorio.save(prueba);
     }
+
     public Prueba update(Prueba entity) {
         return pruebaRepositorio.save(entity);
     }
@@ -91,6 +92,10 @@ public class PruebaService implements IServicio<Prueba, Long> {
 
     public List<Prueba> buscarPruebasConIncidentes(){
         return (List<Prueba>)  pruebaRepositorio.findAllByHuboIncidente();
+    }
+
+    public List<Prueba> buscarPruebasXVehiculo(Long idVehiculo) {
+        return pruebaRepositorio.findAllByVehiculoId(idVehiculo);
     }
 }
 

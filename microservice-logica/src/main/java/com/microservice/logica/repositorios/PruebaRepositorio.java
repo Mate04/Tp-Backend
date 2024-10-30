@@ -14,4 +14,8 @@ public interface PruebaRepositorio extends CrudRepository<Prueba, Long> {
 
     @Query("SELECT s FROM Prueba s where s.huboIncidente = true")
     List<Prueba> findAllByHuboIncidente();
+
+    @Query("SELECT s FROM Prueba s WHERE s.vehiculo.id = :idVehiculo")
+    List<Prueba> findAllByVehiculoId(Long idVehiculo);
+
 }

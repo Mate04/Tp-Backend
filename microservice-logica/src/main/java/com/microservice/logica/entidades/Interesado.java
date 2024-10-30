@@ -1,5 +1,6 @@
 package com.microservice.logica.entidades;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -34,6 +35,7 @@ public class Interesado {
     @Column(name = "fecha_vencimiento_licencia", nullable = false)
     private Date fechaVencimientoLicencia;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "interesado", cascade = CascadeType.ALL)
     private List<Prueba> pruebas;
     @ManyToMany(fetch = FetchType.LAZY)

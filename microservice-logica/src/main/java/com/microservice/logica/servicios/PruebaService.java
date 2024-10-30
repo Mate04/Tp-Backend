@@ -1,14 +1,11 @@
 package com.microservice.logica.servicios;
 
-import com.microservice.logica.client.ServicioAgencia;
 import com.microservice.logica.controladores.DTO.DTOComentario;
 import com.microservice.logica.entidades.Interesado;
-import com.microservice.logica.entidades.Posicion;
 import com.microservice.logica.entidades.Prueba;
 import com.microservice.logica.entidades.Vehiculo;
 import com.microservice.logica.excepciones.PruebaException;
 import com.microservice.logica.repositorios.PruebaRepositorio;
-import com.microservice.logica.utils.Coordenada;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,8 +15,7 @@ import java.util.List;
 @Service
 public class PruebaService implements IServicio<Prueba, Long> {
 
-    @Autowired
-    private ServicioAgencia servicioAgencia;
+
     @Autowired
     private PruebaRepositorio pruebaRepositorio;
     @Autowired
@@ -73,12 +69,8 @@ public class PruebaService implements IServicio<Prueba, Long> {
             prueba.setComentario(comentario.getComentario());
         }
 
-        vehiculo.setDisponible(true);
-        //TODO: ejecutar logica de que mande la ultima posicion de la agencia
-        Coordenada agencia = servicioAgencia.obtenerCoordenadaAgencia();
-        Posicion posicion = new Posicion(vehiculo,agencia.getLatitud(),agencia.getLongitud());
-        vehiculo.getPosiciones().add(posicion);
-        vehiculoServico.update(vehiculo);
+
+        vehiculoServico.finalizarPruebaVehiculo(vehiculo);
         return pruebaRepositorio.save(prueba);
     }
 

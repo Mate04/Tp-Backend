@@ -1,5 +1,6 @@
 package com.microservice.logica.entidades;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.microservice.logica.utils.Coordenada;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -33,12 +34,15 @@ public class Vehiculo {
 
     private boolean disponible;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "vehiculo", cascade = CascadeType.ALL)
     private List<Posicion> posiciones;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "vehiculo", cascade = CascadeType.ALL)
     private List<Prueba> pruebas;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "vehiculosInteresados", cascade = CascadeType.ALL)
     private List<Interesado> interesados;
 

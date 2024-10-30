@@ -2,6 +2,7 @@ package com.microservice.logica.controladores;
 
 import com.microservice.logica.controladores.DTO.DTOFechaPeriodo;
 import com.microservice.logica.controladores.DTO.DTOVehiculo;
+import com.microservice.logica.entidades.Interesado;
 import com.microservice.logica.entidades.Vehiculo;
 import com.microservice.logica.excepciones.ErrorResponse;
 import com.microservice.logica.excepciones.PruebaException;
@@ -49,7 +50,12 @@ public class VehiculoController {
         DTOVehiculo resultado = vehiculoServiceImp.getReporteDistanciaVehiculo(id,fechaPeriodo.getFechaInicio(),fechaPeriodo.getFechaFin());
         return new ResponseEntity<>(resultado, HttpStatus.OK);
     }
+    @PatchMapping("/{id}/interesado")
+    public String addInteresado(@PathVariable("id") Long id, @RequestBody Interesado interesado) {
+        vehiculoServiceImp.addInteresadoVehiculo(id, interesado);
+        return "id: "+id + " | documento:"+interesado.getDocumento();
 
+    }
 
 
     //manejo de error

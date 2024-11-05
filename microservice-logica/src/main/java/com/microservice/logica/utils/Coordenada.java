@@ -1,12 +1,17 @@
 package com.microservice.logica.utils;
 
+import com.google.gson.annotations.SerializedName;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class Coordenada {
+    @SerializedName("lon")
     private double longitud; // <- x
+    @SerializedName("lat")
     private double latitud; // <- y
 
     public double calcularDistancia(Coordenada punto) {

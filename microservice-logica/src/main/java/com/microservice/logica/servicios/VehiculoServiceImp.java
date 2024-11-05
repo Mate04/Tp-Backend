@@ -24,8 +24,7 @@ public class VehiculoServiceImp implements IServicio<Vehiculo,Long> {
 
     @Autowired
     private ServicioNotificacion servicioNotificacion;
-    @Autowired
-    private ServicioAgencia servicioAgencia;
+
     @Autowired
     private InteresadoService interesadoService;
     @Autowired
@@ -61,7 +60,7 @@ public class VehiculoServiceImp implements IServicio<Vehiculo,Long> {
     public void finalizarPruebaVehiculo(Vehiculo vehiculo) {
         //TODO: ejecutar logica de que mande la ultima posicion de la agencia
         vehiculo.setDisponible(true);
-        Coordenada agencia = servicioAgencia.obtenerCoordenadaAgencia();
+        Coordenada agencia = ServicioAgencia.getInstance().obtenerCoordenadaAgencia();
         Posicion posicion = new Posicion(vehiculo,agencia.getLatitud(),agencia.getLongitud());
         vehiculo.getPosiciones().add(posicion);
         this.update(vehiculo);

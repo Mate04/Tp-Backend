@@ -1,11 +1,18 @@
 package com.microservice.logica.utils;
 
+import com.google.gson.annotations.SerializedName;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 public class ZonaPeligrosa {
+
+    @SerializedName("noroeste")
     private Coordenada coordenadaNoroeste;
+    @SerializedName("sureste")
     private Coordenada coordenadaSureste;
+
     private Coordenada coordenadaNoreste;
     private Coordenada coordenadaSuroeste;
 
@@ -14,6 +21,11 @@ public class ZonaPeligrosa {
         this.coordenadaSureste = coordenadaSureste;
         this.coordenadaNoreste = new Coordenada(coordenadaSureste.getLongitud(),coordenadaNoroeste.getLatitud());
         this.coordenadaSuroeste = new Coordenada(coordenadaNoroeste.getLongitud(),coordenadaSureste.getLatitud());
+    }
+
+    public void inicializarCoordenadas() {
+        this.coordenadaNoreste = new Coordenada(coordenadaSureste.getLongitud(), coordenadaNoroeste.getLatitud());
+        this.coordenadaSuroeste = new Coordenada(coordenadaNoroeste.getLongitud(), coordenadaSureste.getLatitud());
     }
 
 

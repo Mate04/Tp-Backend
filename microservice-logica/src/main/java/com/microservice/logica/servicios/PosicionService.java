@@ -34,8 +34,7 @@ public class PosicionService implements IServicio<Posicion,Long> {
     PosicionRepositorio posicionRepositorio;
     @Autowired
     VehiculoServiceImp vehiculoServiceImp;
-    @Autowired
-    ServicioAgencia servicioAgencia;
+
     @Autowired
     ServicioNotificacion servicioNotificacion;
     @Autowired
@@ -59,9 +58,9 @@ public class PosicionService implements IServicio<Posicion,Long> {
             throw new PruebaException("El vehiculo no se encuentra en una prueba");
         }
         Coordenada posicionActual = new Coordenada(posicionAValidar.getLongitud(), posicionAValidar.getLatitud());
-        Coordenada coordenaAgencia = servicioAgencia.obtenerCoordenadaAgencia();
-        Double radioMaximoAgencia = servicioAgencia.obtenerRadioMaximo();
-        List<ZonaPeligrosa> zonasPeligrosas = servicioAgencia.obtenerZonasPeligrosas();
+        Coordenada coordenaAgencia = ServicioAgencia.getInstance().obtenerCoordenadaAgencia();
+        Double radioMaximoAgencia = ServicioAgencia.getInstance().obtenerRadioMaximo();
+        List<ZonaPeligrosa> zonasPeligrosas = ServicioAgencia.getInstance().obtenerZonasPeligrosas();
 
         ZonaPeligrosa zonaPeligrosaDelVehiculo = zonasPeligrosas.stream()
                 .filter(zonaPeligrosa -> zonaPeligrosa.contiene(posicionActual))

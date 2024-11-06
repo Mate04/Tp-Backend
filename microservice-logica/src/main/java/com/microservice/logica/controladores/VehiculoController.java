@@ -1,19 +1,21 @@
 package com.microservice.logica.controladores;
 
-import com.microservice.logica.controladores.DTO.DTOFechaPeriodo;
 import com.microservice.logica.controladores.DTO.DTOVehiculo;
+import com.microservice.logica.controladores.DTO.report.DTOVehiculoReport;
 import com.microservice.logica.entidades.Interesado;
 import com.microservice.logica.entidades.Vehiculo;
 import com.microservice.logica.excepciones.ErrorResponse;
 import com.microservice.logica.excepciones.PruebaException;
 import com.microservice.logica.servicios.VehiculoServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -43,11 +45,13 @@ public class VehiculoController {
     @GetMapping("/recorrido/{id}")
     public ResponseEntity<?> findVehiculoById(
             @PathVariable("id") Long id,
-            @RequestBody DTOFechaPeriodo fechaPeriodo) {
-        if (fechaPeriodo.getFechaInicio() == null || fechaPeriodo.getFechaFin() == null) {
-            throw new PruebaException("Las fechas de inicio y fin son obligatorias");
+            @RequestParam(required = true) @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaInicio,
+            @RequestParam(required = true) @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaFin
+            ) {
+        DTOVehiculoReport resultado = vehiculoServiceImp.getReporteDistanciaVehiculo(id,fechaInicio,fechaFin);
+        if (resultado.getDistanciaRecorrida().equals("0")) {
+            return new ResponseEntity<>("No hubo resultados", HttpStatus.OK);
         }
-        DTOVehiculo resultado = vehiculoServiceImp.getReporteDistanciaVehiculo(id,fechaPeriodo.getFechaInicio(),fechaPeriodo.getFechaFin());
         return new ResponseEntity<>(resultado, HttpStatus.OK);
     }
     @PatchMapping("/{id}/interesado")

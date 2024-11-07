@@ -18,6 +18,7 @@ public class PosicionController {
     @Autowired
     private PosicionService posicionService;
 
+    //TODO: Autorizado interesado que este usando en ese momento el vehiculo
     @PostMapping("")
     public String crearUbicacionVehiculo(@RequestBody Posicion posicion) {
         posicionService.save(posicion);

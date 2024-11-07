@@ -1,4 +1,4 @@
-package com.microservice.gateway;
+package com.microservice.gateway.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.gateway.route.RouteLocator;
@@ -17,14 +17,26 @@ public class GWConfig {
     public RouteLocator configurarRutas(RouteLocatorBuilder builder
                                         ) {
         return builder.routes()
+                //Vehiculo
+                //todo: solo el rol admin puede acceder aca
                 .route(p -> p
                         .path("/api/vehiculo/**")
                         .uri(uriLogica)
                 )
-                .route(p -> p.path("/api/prueba")
-                        .and()
-                        .method("POST")
+                //Posicion
+                //todo: aca rol admin y usuario
+                .route(p -> p.path("/api/posicion/**")
                         .uri(uriLogica)
+                )
+                //PRUEBA
+                //todo: aca rol admin y una parte empleado
+                .route(p -> p.path("/api/prueba/**")
+                        .uri(uriLogica)
+                )
+                //inicidente de prueba
+                //todo: aca rol admin y una parte empleado
+                .route(p -> p.path("api/notificacion/**")
+                        .uri(uriNotif)
                 )
                 .build();
     }

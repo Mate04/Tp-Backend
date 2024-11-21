@@ -22,11 +22,14 @@ public class ControllerPromocionNotificacion {
     @Autowired
     private ServiceNotificacionPromocion serviceNotificacionPromocion;
 
+    //Solo el empleado
     @PostMapping("/")
     public ResponseEntity<NotificacionPromocion> createMensage(@RequestBody NotificacionPromocion notificacionPromocion) {
         serviceNotificacionPromocion.save(notificacionPromocion);
         return ResponseEntity.ok(notificacionPromocion);
     }
+
+    //Solo el empleado
     @PostMapping("/list")
     public ResponseEntity<List<NotificacionPromocion>> createListMensage(@RequestBody List<NotificacionPromocion> notificacionesPromociones) {
         List<NotificacionPromocion> savedNotifications = notificacionesPromociones.stream()

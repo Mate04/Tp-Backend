@@ -27,7 +27,7 @@
 	</scm>
 	<properties>
 		<java.version>17</java.version>
-		<spring-cloud.version>2023.0.3</spring-cloud.version>
+		<spring-cloud.version>2022.0.4</spring-cloud.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -46,12 +46,34 @@
 			<scope>test</scope>
 		</dependency>
 
+		<!-- Security: OAuth2 Resource Server, OAuth2 JOSE -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-oauth2-jose</artifactId>
+			<version>6.1.4</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+
 		<!-- Dependencia de Netty para resolver el error de 'netty-transport-native-epoll' -->
 		<dependency>
 			<groupId>io.netty</groupId>
 			<artifactId>netty-transport-native-epoll</artifactId>
 			<version>4.1.94.Final</version> <!-- Usa una versión estable -->
 			<classifier>linux-x86_64</classifier> <!-- Clasificador para sistemas Linux -->
+		</dependency>
+
+		<dependency>
+			<groupId>jakarta.servlet</groupId>
+			<artifactId>jakarta.servlet-api</artifactId>
+			<version>6.0.0</version> <!-- O usa una versión compatible con tu entorno -->
+			<scope>provided</scope>
 		</dependency>
 	</dependencies>
 

@@ -5,7 +5,7 @@
     <!-- Aca denoto que va hacer hijo de spring loop -->
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>3.3.4</version>
+    <version>3.1.5</version>
   </parent>
   <groupId>org.utn.backend</groupId>
   <artifactId>TpBack2024</artifactId>

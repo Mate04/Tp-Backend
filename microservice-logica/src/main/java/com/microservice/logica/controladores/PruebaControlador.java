@@ -22,6 +22,7 @@ public class PruebaControlador {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
+    //Crear prueba es para los empleados
     public ResponseEntity<DTOPrueba> crearPrueba(@RequestBody Prueba prueba) {
         // aca verfico que se envie bien los mensajes
         if (prueba.getEmpleado() == null) {
@@ -32,9 +33,8 @@ public class PruebaControlador {
         pruebaServicio.save(prueba);
         Prueba pruebaCreada = pruebaServicio.findByID(prueba.getId());
         return  new ResponseEntity<>(new DTOPrueba(pruebaCreada),HttpStatus.CREATED);
-
      }
-
+    //El admin puede ver las pruebas en curso
      @GetMapping
      @RequestMapping("/pruebas-en-curso")
      public List<DTOPrueba> obtenerPruebasEnCurso() {
@@ -46,6 +46,7 @@ public class PruebaControlador {
         return pruebasEnCursoDTO;
      }
 
+    //Forma parte de los reportes del admin
     @RequestMapping("/pruebas-incidentes")
     public List<DTOPrueba> buscarPruebasConIncidentes() {
         List<Prueba> pruebasConIncidentes = pruebaServicio.buscarPruebasConIncidentes();
@@ -55,7 +56,7 @@ public class PruebaControlador {
         }
         return pruebasConIncidentesDTO;
     }
-
+    //Reporte del admin
     @RequestMapping("/pruebasVehiculo/{id_vehiculo}")
     public List<DTOPrueba> buscarPruebasXVehiculo(@PathVariable Long id_vehiculo) {
         List<Prueba> pruebasXVehiculo = pruebaServicio.buscarPruebasXVehiculo(id_vehiculo);
@@ -66,6 +67,7 @@ public class PruebaControlador {
         return pruebasXVehiculoDTO;
     }
 
+    //El empleado y el admin pueden finalizar pruebas
     @PatchMapping("/finalizar/{id}")
     public ResponseEntity<DTOPrueba> finalizarPrueba(@PathVariable Long id, @RequestBody(required = false) DTOComentario comentario) {
         Prueba prueba = pruebaServicio.finalizar(id, comentario);

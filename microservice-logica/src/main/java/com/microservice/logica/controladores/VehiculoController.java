@@ -42,6 +42,7 @@ public class VehiculoController {
         return new ResponseEntity<>(vehiculos, HttpStatus.OK);
     }
 
+    //Reporte del admin, (cantidad de kilometros de prueba que realizó un vehiculo
     @GetMapping("/recorrido/{id}")
     public ResponseEntity<?> findVehiculoById(
             @PathVariable("id") Long id,
@@ -54,6 +55,8 @@ public class VehiculoController {
         }
         return new ResponseEntity<>(resultado, HttpStatus.OK);
     }
+
+
     @PatchMapping("/{id}/interesado")
     public String addInteresado(@PathVariable("id") Long id, @RequestBody Interesado interesado) {
         vehiculoServiceImp.addInteresadoVehiculo(id, interesado);

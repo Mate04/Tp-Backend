@@ -20,6 +20,7 @@ public class ControllerNotificacionAdverentencia {
         return notificacionAdvertencia.toString();
     };
 
+    //solo el admin
     @GetMapping("/empleado/{legajo}")
     public List<NotificacionAdvertencia> buscarIncidentesDeEmpleado(@PathVariable Long legajo) {
         return serviceNotificacionAdverentencia.buscarIncidentesPorEmpleado(legajo);

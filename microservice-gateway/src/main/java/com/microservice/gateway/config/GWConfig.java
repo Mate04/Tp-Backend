@@ -1,4 +1,4 @@
-package com.microservice.gateway;
+package com.microservice.gateway.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.gateway.route.RouteLocator;
@@ -35,7 +35,11 @@ public class GWConfig {
                 )
                 //inicidente de prueba
                 //todo: aca rol admin y una parte empleado
+<<<<<<< HEAD:microservice-gateway/src/main/java/com/microservice/gateway/GWConfig.java
                 .route(p -> p.path("/api/notificacion/**")
+=======
+                .route(p -> p.path("api/notificacion/**")
+>>>>>>> 463e71e6b6688012ce44f85fee4db040f1a67972:microservice-gateway/src/main/java/com/microservice/gateway/config/GWConfig.java
                         .uri(uriNotif)
                 )
                 .build();

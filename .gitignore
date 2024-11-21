@@ -37,3 +37,5 @@ build/
 ### Mac OS ###
 .DS_Store
 microservice-logica/src/main/resources/application.properties
+
+keycloak-26.0.5
